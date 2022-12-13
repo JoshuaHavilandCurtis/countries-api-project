@@ -35,7 +35,9 @@
 
         function rOutput() {
             let myObj = JSON.parse(this.responseText);
-            console.log(myObj);
+            pick = myObj[Math.floor(Math.random()*myObj.length)];
+            console.log(myObj)
+            console.log(pick);
         }
 
     </script>
