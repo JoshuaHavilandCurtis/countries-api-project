@@ -5,11 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countries API</title>
+
+    <style>
+        .box {
+            font-size: 1.5rem;
+            background-color: aliceblue;
+            border: 1px solid black;
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
 </head>
 <body>
     
     <div id="output">Complete JavaScript Course</div>
     <input type="button" id="myButton" value="Load Data">
+    <input type="text" id="guess" placeholder="Guess">
+    <input type="button" id="myguess" value="Guess">
+
+    <div id="output1" class="box"></div>
+    <div id="output2" class="box"></div>
 
     <script>
         window.onload = init; 
@@ -36,8 +51,21 @@
         function rOutput() {
             let myObj = JSON.parse(this.responseText);
             pick = myObj[Math.floor(Math.random()*myObj.length)];
+        
+            document.getElementById('output1').innerHTML = shuffleWord(pick.name);
             console.log(myObj)
             console.log(pick);
+        }
+
+        function shuffleWord(w) {
+            let response = '';
+            w = w.split("");
+            console.log(w)
+
+            while(w.length > 0) {
+                response += w.splice(Math.floor(Math.random()*w.length), 1);
+            }
+            return response;
         }
 
     </script>
