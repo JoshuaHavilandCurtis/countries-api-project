@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countries API</title>
+</head>
+<body>
+    
+    <div id="output">Complete JavaScript Course</div>
+    <input type="button" id="myButton" value="Load Data">
+
+    <script>
+        window.onload = init; 
+        let pick = "";
+        // https://restcountries.com/v2/all
+
+        function init() {
+            let loadData = document.querySelector('#myButton');
+
+            loadData.addEventListener('click', () => {
+                myLoader();
+            });
+        }
+
+        function myLoader() {
+            let xHR = new XMLHttpRequest();
+            //  newer browsers allow you to use the responseType property to define the expected format of the response.
+            // xHR.responseText = 'json';
+            xHR.onload = rOutput;
+            xHR.open('get', 'https://restcountries.com/v2/all', true);
+            xHR.send();
+        }
+
+        function rOutput() {
+            let myObj = JSON.parse(this.responseText);
+            console.log(myObj);
+        }
+
+    </script>
+
+</body>
+</html>
