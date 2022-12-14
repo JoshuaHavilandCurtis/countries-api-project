@@ -33,9 +33,13 @@
 
         function init() {
             let loadData = document.querySelector('#myButton');
+            let guessBtn = document.querySelector('#myguess');
 
             loadData.addEventListener('click', () => {
                 myLoader();
+            });
+            guessBtn.addEventListener('click', () => {
+                guessWord();
             });
         }
 
@@ -48,11 +52,44 @@
             xHR.send();
         }
 
+        function guessWord() {
+            let guessinput = document.getElementById('guess');
+            let guessinputvalue = guessinput.value; 
+            // value of input
+
+             for (var i = 0; i < pick.name.length; i++) {
+                console.log(pick.name[i]);
+            }
+            // loop thorugh the letters of pick.name 
+
+            // **************** TODO *******************
+            // toLowerCase 
+            // update output2 to correct letters 
+        }
+
         function rOutput() {
+
+            // reponsetext is parsed to JSON data, array 
             let myObj = JSON.parse(this.responseText);
+
+            // Pick variable, does a math.floor always rounds down and returns the largest integer less than or equal to a given number.
+            // Math.random() multiply by the object length, adds the random chosen array to the pick variable.
             pick = myObj[Math.floor(Math.random()*myObj.length)];
-        
+
+            // console.log('what is pick doing', pick, myObj[Math.floor(Math.random() * myObj.length)]);
+            let ww = "";
+
+            // This will get the pick variable, choosen random array and count up from 0 for the dashes 
+            for(let x = 0; x<pick.name.length; x++) {
+                ww += '-'
+            }
+
+            // Pick name
             document.getElementById('output1').innerHTML = shuffleWord(pick.name);
+
+            // Adding the dashes
+            document.getElementById('output2').innerHTML = ww;
+
             console.log(myObj)
             console.log(pick);
         }
