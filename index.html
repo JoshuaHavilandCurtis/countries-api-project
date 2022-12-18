@@ -25,6 +25,7 @@
     <input type="button" id="myguess" value="Guess">
 
     <div id="output1" class="box"></div>
+    <img src="" width="100px" class="box">
     <div id="output2" class="box"></div>
 
     <script>
@@ -54,18 +55,29 @@
         }
 
         function guessWord() {
+            // Guess is the input
             let guessinput = document.getElementById('guess');
-            let guessinputvalue = guessinput.value; 
+            // Guess value
+            let guessinputvalue = guessinput.value.toLowerCase; 
+
+            //console.log('this is the guess to lowercase', guessinputvalue)
             // value of input
 
-             for (var i = 0; i < pick.name.length; i++) {
-                console.log(pick.name[i]);
-            }
-            // loop thorugh the letters of pick.name 
+            let userGuess = "";
+            // console.log('this is the userguess in userguess variable', userGuess)
 
-            // **************** TODO *******************
-            // toLowerCase 
-            // update output2 to correct letters 
+            for (var i = 0; i < pick.name.length; i++) {
+                console.log('user guess value', guessinputvalue);
+
+                if(guessinputvalue[i] == pick.name[i].toLowerCase()) {
+                    userGuess += guessinputvalue[i];
+                    console.log('user guess in loop', userGuess)
+                } else {
+                    userGuess += '-';
+                }
+            }
+
+            document.getElementById('output2').innerHTML = userGuess;
         }
 
         function rOutput() {
@@ -76,7 +88,6 @@
             // Pick variable, does a math.floor always rounds down and returns the largest integer less than or equal to a given number.
             // Math.random() multiply by the object length, adds the random chosen array to the pick variable.
             pick = myObj[Math.floor(Math.random()*myObj.length)];
-
             // console.log('what is pick doing', pick, myObj[Math.floor(Math.random() * myObj.length)]);
             let ww = "";
 
@@ -88,9 +99,12 @@
             // Pick name
             document.getElementById('output1').innerHTML = shuffleWord(pick.name);
 
+            let flag = pick.flag;
+            console.log('flag', flag);
+
             // Adding the dashes
             document.getElementById('output2').innerHTML = ww;
-
+            document.querySelector('img').src = flag;
             console.log(myObj)
             console.log(pick);
         }
@@ -103,7 +117,7 @@
             while(w.length > 0) {
                 response += w.splice(Math.floor(Math.random()*w.length), 1);
             }
-            return response;
+            return response.toLowerCase();
         }
 
     </script>
